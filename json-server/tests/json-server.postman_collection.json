@@ -1,0 +1,65 @@
+{
+	"variables": [],
+	"info": {
+		"name": "json-server",
+		"_postman_id": "55d7b4a4-e5e9-5528-0b3e-6c6ee60faf02",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body contains string\"] = responseBody.has(\"json-server2\");",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"There are more than 10 titles\"] = jsonData.length > 10;",
+							"",
+							"tests[\"Response time is less than 2000ms\"] = responseTime < 2000;",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/posts",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get post details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"id is 2\"] = jsonData.id === 2;",
+							"tests[\"title is json-server2\"] = jsonData.title === \"json-server2\";",
+							"tests[\"author is typicode\"] = jsonData.author === \"typicode\";"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:3000/posts/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,1 @@
+json-server -w project\db.json
