@@ -45,7 +45,7 @@
 						"type": "text/javascript",
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"id is 2\"] = jsonData.id === 2;",
+							"tests[\"id is 2\"] = jsonData.id === 3;",
 							"tests[\"title is json-server2\"] = jsonData.title === \"json-server2\";",
 							"tests[\"author is typicode\"] = jsonData.author === \"typicode\";"
 						]
