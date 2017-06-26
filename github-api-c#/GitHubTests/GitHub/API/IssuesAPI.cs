@@ -51,5 +51,19 @@ namespace GitHubTests.GitHub.API
             var result = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<IssueDetails>(result);
         }
+
+        public IssueDetails CloseIssue(string organization, string repository, int number)
+        {
+            var uri = string.Format("{0}/repos/{1}/{2}/issues/{3}", GitHubAPIBaseURL, organization, repository, number.ToString());
+            var message = new HttpRequestMessage(new HttpMethod("PATCH"), new Uri(uri));
+            var content = "{\"state\": \"closed\"}";
+            message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            message.Content = new StringContent(content, Encoding.UTF8, "application/json");
+            var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
+            message.Headers.Authorization = new AuthenticationHeaderValue("Token", token);
+            var response = HttpHelper.SendRequest(message);
+            var result = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<IssueDetails>(result);            
+        }
     }
 }

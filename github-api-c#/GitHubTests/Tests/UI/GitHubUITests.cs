@@ -25,7 +25,7 @@ namespace GitHubTests
             driver.Quit();
         }
 
-        [TestMethod]
+        [TestCategory("UITest"), TestMethod]
         public void OpenIssuesAreLessThenClosed()
         {
             IssuesPage issues = new IssuesPage(this.driver);
@@ -35,7 +35,7 @@ namespace GitHubTests
             Assert.IsTrue(open < closed, "Open issues are more than opened!");
         }
 
-        [TestMethod]
+        [TestCategory("UITest"), TestMethod]
         public void OpenIssuesCountIsCorrect()
         {
             IssuesPage issues = new IssuesPage(this.driver);
