@@ -4,13 +4,22 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using GitHubTests.Helpers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
 namespace GitHubTests.GitHub.API
 {
     class IssuesAPI
     {
-        private static string GitHubAPIBaseURL = "https://api.github.com";
+        private string GitHubAPIBaseURL = "https://api.github.com";
+
+        private string ConvertToString(Object details) {
+            return JsonConvert.SerializeObject(details,
+                new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+        }
 
         public List<IssueDetails> GetAllIssues(string organization, string repository, string options = null)
         {
@@ -38,15 +47,20 @@ namespace GitHubTests.GitHub.API
         {
             var uri = string.Format("{0}/repos/{1}/{2}/issues", GitHubAPIBaseURL, organization, repository);
             var message = new HttpRequestMessage(HttpMethod.Post, new Uri(uri));
-            var content = JsonConvert.SerializeObject(issue,
-                            new JsonSerializerSettings
-                            {
-                                NullValueHandling = NullValueHandling.Ignore
-                            });
-            message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var content = this.ConvertToString(issue);
             message.Content = new StringContent(content, Encoding.UTF8, "application/json");
-            var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
-            message.Headers.Authorization = new AuthenticationHeaderValue("Token", token);
+            var response = HttpHelper.SendRequest(message);
+            Assert.AreEqual(System.Net.HttpStatusCode.Created, response.StatusCode);
+            var result = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<IssueDetails>(result);
+        }
+
+        public IssueDetails UpdateIssue(string organization, string repository, int number, IssueDetails details)
+        {
+            var uri = string.Format("{0}/repos/{1}/{2}/issues/{3}", GitHubAPIBaseURL, organization, repository, number.ToString());
+            var message = new HttpRequestMessage(new HttpMethod("PATCH"), new Uri(uri));
+            var content = this.ConvertToString(details);
+            message.Content = new StringContent(content, Encoding.UTF8, "application/json");
             var response = HttpHelper.SendRequest(message);
             var result = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<IssueDetails>(result);
@@ -54,16 +68,9 @@ namespace GitHubTests.GitHub.API
 
         public IssueDetails CloseIssue(string organization, string repository, int number)
         {
-            var uri = string.Format("{0}/repos/{1}/{2}/issues/{3}", GitHubAPIBaseURL, organization, repository, number.ToString());
-            var message = new HttpRequestMessage(new HttpMethod("PATCH"), new Uri(uri));
-            var content = "{\"state\": \"closed\"}";
-            message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            message.Content = new StringContent(content, Encoding.UTF8, "application/json");
-            var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
-            message.Headers.Authorization = new AuthenticationHeaderValue("Token", token);
-            var response = HttpHelper.SendRequest(message);
-            var result = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<IssueDetails>(result);            
+            var details = new IssueDetails();
+            details.state = "closed";
+            return this.UpdateIssue(organization: organization, repository: repository, number: number, details: details);
         }
     }
 }

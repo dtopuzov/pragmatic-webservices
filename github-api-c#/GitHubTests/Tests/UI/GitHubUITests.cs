@@ -29,7 +29,6 @@ namespace GitHubTests
         public void OpenIssuesAreLessThenClosed()
         {
             IssuesPage issues = new IssuesPage(this.driver);
-            issues.NavigateTo();
             int open = issues.GetOpenIssuesCount();
             int closed = issues.GetClosedIssuesCount();
             Assert.IsTrue(open < closed, "Open issues are more than opened!");
@@ -38,10 +37,9 @@ namespace GitHubTests
         [TestCategory("UITest"), TestMethod]
         public void OpenIssuesCountIsCorrect()
         {
-            IssuesPage issues = new IssuesPage(this.driver);
+            IssuesPage issuesPage = new IssuesPage(this.driver);
             IssuesAPI issuesAPI = new IssuesAPI();
-            issues.NavigateTo();
-            int openUI = issues.GetOpenIssuesCount();
+            int openUI = issuesPage.GetOpenIssuesCount();
             int openAPI = issuesAPI.GetAllIssues(organization:"dtopuzov", repository:"test", options: "state=open").Count;
             Assert.AreEqual(openUI, openAPI, "API and UI report different issues count!");
         }

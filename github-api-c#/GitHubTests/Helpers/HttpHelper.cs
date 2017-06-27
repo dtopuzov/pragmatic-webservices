@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace GitHubTests.Helpers
 {
@@ -10,6 +11,12 @@ namespace GitHubTests.Helpers
         public static HttpResponseMessage SendRequest(HttpRequestMessage message)
         {
             message.Headers.UserAgent.ParseAdd(UserAgent);
+            var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
+            message.Headers.Authorization = new AuthenticationHeaderValue("Token", token);
+            if (message.Method != HttpMethod.Get)
+            {
+                message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }
             using (var httpClient = new HttpClient())
             {
                 httpClient.Timeout = new TimeSpan(0, 10, 0);

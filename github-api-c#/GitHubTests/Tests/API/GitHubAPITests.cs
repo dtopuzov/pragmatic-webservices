@@ -37,6 +37,7 @@ namespace GitHubTests
             var issueDetails = issuesAPI.CreateIssue(organization: "dtopuzov", repository: "test", issue: issue);
             Assert.AreEqual("Issues reported with C#", issueDetails.title);
             Assert.AreEqual("This issue is logged via C# code.", issueDetails.body);
+            Assert.IsTrue(issueDetails.number > 1, "Issue number is valid!");
         }
 
         [TestCategory("APITest"), TestMethod]

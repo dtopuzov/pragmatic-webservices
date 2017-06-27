@@ -18,11 +18,12 @@ namespace GitHubTests.GitHub.UI
         {
             this._driver = driver;
             PageFactory.InitElements(_driver, this);
+            this._driver.Navigate().GoToUrl(url);
         }
 
-        public void NavigateTo()
+        public void goToOpenIssues()
         {
-            this._driver.Navigate().GoToUrl(url);
+            this.openIssues.Click();
         }
 
         public int GetClosedIssuesCount()
