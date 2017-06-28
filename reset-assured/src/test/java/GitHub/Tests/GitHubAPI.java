@@ -1,6 +1,6 @@
 package GitHub.Tests;
 
-import GitHub.Objects.Issue;
+import GitHub.Objects.CreateIssue;
 import io.restassured.RestAssured;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -44,14 +44,15 @@ public class GitHubAPI {
 
     @Test
     public void CreateIssueWithBasicAuthentication() {
-        Issue issue = new Issue();
+        CreateIssue issue = new CreateIssue();
         issue.title = "Title1";
         issue.body = "This is body.";
 
         given().
                 auth().
                 preemptive().   // See https://github.com/rest-assured/rest-assured/issues/356#issuecomment-123187692
-                basic(user, password).  // Demo of basic authentication
+                //basic(user, password).  // Demo of basic authentication
+                        oauth2(personalToken).  // Oauth2 authentication sample
                 contentType("application/json; charset=UTF-8").
                 body(issue).
                 when().
@@ -62,7 +63,7 @@ public class GitHubAPI {
 
     @Test
     public void CreateIssueWithTokenAuthentication() {
-        Issue issue = new Issue();
+        CreateIssue issue = new CreateIssue();
         issue.title = "Title2";
         issue.body = "This is body.";
 
@@ -94,17 +95,16 @@ public class GitHubAPI {
         // Close all open issues
         for (int id : issueIds) {
             System.out.println("Closing issue #" + String.valueOf(id));
-
-            Issue issue = new Issue();
+            CreateIssue issue = new CreateIssue();
             issue.state = "closed";
 
             given().
                     auth().
                     preemptive(). // See https://github.com/rest-assured/rest-assured/issues/356#issuecomment-123187692
-                    basic(user, password).
+                    //basic(user, password).
+                            oauth2(personalToken).  // Oauth2 authentication sample
                     contentType("application/json; charset=UTF-8").
-                    //param("state", "closed").
-                            body(issue).
+                    body(issue).
                     when().
                     patch("/" + String.valueOf(id)).
                     then().
