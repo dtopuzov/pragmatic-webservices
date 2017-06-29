@@ -28,3 +28,6 @@
 [jsonschema2pojo](http://www.jsonschema2pojo.org/)
 For current proejct we use Jackson 1.x
 
+## Command-line execution
+mvn clean test -Dtest=GitHub.API.GitHubAPITests
+
