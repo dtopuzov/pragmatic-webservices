@@ -38,7 +38,7 @@ public class GitHubAPITests {
                 when().
                 post().
                 then().
-                statusCode(201);
+                statusCode(202);
     }
 
     @Test
