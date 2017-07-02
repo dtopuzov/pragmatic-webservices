@@ -1,9 +1,10 @@
 package GitHub.Objects;
 
-import java.util.List;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import java.util.List;
 
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @JsonPropertyOrder({
@@ -27,10 +28,10 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
         "created_at",
         "updated_at",
         "closed_at",
-        "body"
+        "body",
+        "closed_by"
 })
 public class IssueDetails {
-
     @JsonProperty("url")
     public String url;
     @JsonProperty("repository_url")
@@ -73,4 +74,6 @@ public class IssueDetails {
     public Object closedAt;
     @JsonProperty("body")
     public String body;
+    @JsonProperty("closed_by")
+    public Object closedBy;
 }
