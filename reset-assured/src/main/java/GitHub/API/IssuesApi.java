@@ -27,7 +27,7 @@ public class IssuesApi {
      * @param repository   GitHub repository.
      */
     public IssuesApi(String organization, String repository) {
-        this.personalToken = System.getenv("PERSONAL_TOKEN");
+        this.personalToken = System.getenv("GITHUB_PERSONAL_TOKEN");
         this.baseURL = String.format("https://api.github.com/repos/%s/%s/issues", organization, repository);
     }
 

@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 
 public class GitHubAPITests {
 
-    private static String personalToken = System.getenv("PERSONAL_TOKEN");
+    private static String personalToken = System.getenv("GITHUB_PERSONAL_TOKEN");
     private static String baseURL = "https://api.github.com";
     private static String organization = "dtopuzov";
     private static String repo = "test";
@@ -38,7 +38,7 @@ public class GitHubAPITests {
                 when().
                 post().
                 then().
-                statusCode(202);
+                statusCode(201);
     }
 
     @Test

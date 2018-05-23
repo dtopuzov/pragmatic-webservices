@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 
 public class GitHubAPITests_v1 {
 
-    private static String personalToken = System.getenv("PERSONAL_TOKEN");
+    private static String personalToken = System.getenv("GITHUB_PERSONAL_TOKEN");
     private static String baseURL = "https://api.github.com";
     private static String organization = "dtopuzov";
     private static String repo = "test";

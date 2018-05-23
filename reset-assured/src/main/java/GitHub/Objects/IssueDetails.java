@@ -29,6 +29,7 @@ import java.util.List;
         "updated_at",
         "closed_at",
         "body",
+        "author_association",
         "closed_by"
 })
 public class IssueDetails {
@@ -76,4 +77,6 @@ public class IssueDetails {
     public String body;
     @JsonProperty("closed_by")
     public Object closedBy;
+    @JsonProperty("author_association")
+    private String authorAssociation;
 }
