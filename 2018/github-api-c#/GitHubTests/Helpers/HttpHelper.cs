@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -15,6 +16,7 @@ namespace GitHubTests.Helpers
 
         public static HttpResponseMessage SendRequest(HttpRequestMessage message)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             message.Headers.UserAgent.ParseAdd(UserAgent);
             var byteArray = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", User, Password));
             message.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));

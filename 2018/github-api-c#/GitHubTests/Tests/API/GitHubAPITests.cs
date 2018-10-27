@@ -56,7 +56,7 @@ namespace GitHubTests
         {
             var issueDetails = issuesAPI.GetIssueDetails(organization: User, repository: Repo, issueNumber: 1);
             Assert.AreEqual(1, issueDetails.number);
-            Assert.AreEqual("Closed issue", issueDetails.title);
+            Assert.AreEqual("First issue", issueDetails.title);
         }
 
         [TestCategory("APITest"), TestMethod]

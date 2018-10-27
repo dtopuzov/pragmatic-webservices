@@ -19,20 +19,6 @@ When yhou first open the project on new machine you may need to clean and rebuil
 Build -> Clean
 Build -> Rebuild Solution
 
-## Troubleshoot HTTP Trafic
-
-Enable proxy and capture trafic.
-
-Enable proxy in VS 2017 Community Edition:
-- Open `%ProgramFiles(x86)%\Microsoft Visual Studio\2017\community\Common7\IDE`
-- Find `devenv.exe.config`
-- In the configuration file, find the <system.net> block, and then add this code:
-```
-<defaultProxy enabled="true" useDefaultCredentials="true">
-    <proxy bypassonlocal="True" proxyaddress=" HYPERLINK "http://<yourproxy:port#>" http://<yourproxy:port#>"/>
-</defaultProxy>
-```
-
 ## HowTos
 
 [Hooks in MsTest](https://stackoverflow.com/questions/2382552/is-it-possible-to-execute-code-once-before-all-tests-run)
