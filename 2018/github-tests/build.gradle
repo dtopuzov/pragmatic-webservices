@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+}
+
+group 'com.pragmatic'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.testng', name: 'testng', version: '6.14.3'
+    compile group: 'io.rest-assured', name: 'rest-assured', version: '3.2.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.7'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.7'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
+    compile("io.github.bonigarcia:webdrivermanager:3.0.0")
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'
+}
+
+// Task for Api test.
+task apiTests(type: Test, description: 'GitHub API Tests', group: 'Verification') {
+
+    include "**/api/**"
+
+    useTestNG()
+
+    testLogging {
+        showStandardStreams = true
+
+        exceptionFormat "full"
+        events "passed", "skipped", "failed"
+    }
+}
+
+// Task for Web test.
+task webTests(type: Test, description: 'GitHub Web Tests', group: 'Verification') {
+
+    include "**/web/**"
+
+    useTestNG()
+
+    testLogging {
+        showStandardStreams = true
+
+        exceptionFormat "full"
+        events "passed", "skipped", "failed"
+    }
+}
