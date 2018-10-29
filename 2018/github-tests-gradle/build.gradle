@@ -23,6 +23,10 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.14.0'
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.8'
+}
+
 // Task for Api test.
 task apiTests(type: Test, description: 'GitHub API Tests', group: 'Verification') {
 
