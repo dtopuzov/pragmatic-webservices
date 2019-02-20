@@ -14,7 +14,7 @@
 						"id": "0b093344-8ebc-458e-bce4-e04eb3b48181",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"    pm.response.to.have.status(201);",
 							"});",
 							"",
 							"pm.test(\"Results include Practical MongoDB\", function () {",
