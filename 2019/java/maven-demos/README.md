@@ -9,5 +9,5 @@ mvn clean test
 
 Run specific test
 ```
- mvn clean test -Dtest=testng.TestClass1
+ mvn clean test -Dtest=testng.Test
 ```
