@@ -11,7 +11,8 @@ class Chrome(object):
         Init browser.
         :param implicitly_wait: Implicit wait in seconds.
         """
-        self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+        executable_path = ChromeDriverManager().install()
+        self.driver = webdriver.Chrome(executable_path=executable_path)
         self.driver.implicitly_wait(implicitly_wait)
         self.driver.maximize_window()
 
