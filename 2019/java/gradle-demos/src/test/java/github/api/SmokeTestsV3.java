@@ -1,7 +1,7 @@
-package github_tests.api;
+package github.api;
 
-import github.IssueDetails;
-import github.Label;
+import github.objects.IssueDetails;
+import github.objects.Label;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.testng.Assert;
@@ -15,9 +15,9 @@ import java.util.List;
 import static io.restassured.RestAssured.*;
 
 /**
- * Refactored version of SmokeTestsV1
+ * Refactored version of SmokeTestsV1 using objects instead of strings in body.
  */
-public class SmokeTestsV2 {
+public class SmokeTestsV3 {
 
     private Integer issueNumber;
     private String user = Utils.getEnvironmentVariable("USER");
@@ -58,7 +58,7 @@ public class SmokeTestsV2 {
         Assert.assertEquals(result.labels.get(0).name, label.name);
     }
 
-    @Test(dependsOnMethods = "createIssue")
+    @Test(dependsOnMethods = "SmokeTestsV3.createIssue")
     public void getIssueDetails() {
         IssueDetails result = when().
                 get(String.valueOf(issueNumber)).
@@ -70,7 +70,7 @@ public class SmokeTestsV2 {
         Assert.assertEquals(result.user.login, user);
     }
 
-    @Test(dependsOnMethods = "createIssue")
+    @Test(dependsOnMethods = "SmokeTestsV43.createIssue")
     public void updateIssue() {
         IssueDetails update = new IssueDetails();
         update.state = "closed";
@@ -86,5 +86,6 @@ public class SmokeTestsV2 {
                         response().getBody().as(IssueDetails.class);
 
         Assert.assertEquals(result.user.login, user);
+        Assert.assertEquals(result.state, "closed");
     }
 }

@@ -1,4 +1,4 @@
-package github;
+package github.objects;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -20,8 +20,5 @@ public class Label {
     @SerializedName("color")
     @Expose
     public String color;
-    @SerializedName("default")
-    @Expose
-    public Boolean _default;
 
 }

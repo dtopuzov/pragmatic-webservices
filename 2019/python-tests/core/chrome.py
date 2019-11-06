@@ -2,7 +2,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-class Chrome(object):
+class Chrome:
     driver = None
     implicitly_wait = None
 

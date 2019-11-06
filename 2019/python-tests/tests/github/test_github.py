@@ -1,5 +1,3 @@
-import os
-
 import requests
 from selenium.webdriver.common.by import By
 
@@ -9,11 +7,6 @@ from core.web_test import WebTest
 class TestGitHub(WebTest):
     API_URL = "https://api.github.com/repos/ws-test-user/test/issues/1"
     WEB_URL = "https://github.com/ws-test-user/test/issues/1"
-
-    def tearDown(self):
-        project_root = os.path.dirname(os.path.abspath(__file__))
-        png = "{0}.png".format(self._testMethodName)
-        self.browser.driver.get_screenshot_as_png(os.path.join(project_root, 'out', png))
 
     def test_issue_details(self):
         """

@@ -1,3 +1,4 @@
+import os
 import unittest
 
 from core.chrome import Chrome
@@ -11,10 +12,12 @@ class WebTest(unittest.TestCase):
         cls.browser = Chrome()
 
     def setUp(self):
-        print()
+        pass
 
     def tearDown(self):
-        print()
+        project_root = os.path.dirname(os.path.abspath(__file__))
+        png = "{0}.png".format(self._testMethodName)
+        self.browser.driver.get_screenshot_as_file(os.path.join(project_root, 'out', png))
 
     @classmethod
     def tearDownClass(cls):

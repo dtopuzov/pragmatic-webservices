@@ -1,6 +1,5 @@
 ## Web & API Integration Tests Demo
 
-
 ### About
 Demo project to show how we can test both web and rest api with same solution.
 
@@ -17,15 +16,15 @@ Demo project to show how we can test both web and rest api with same solution.
 
 Install requirements:
 ```bash
-pip install --upgrade -r requirements.txt --user
+pip3 install --upgrade -r requirements.txt --user
 ```
 
 Run lint to check for styling issues:
 ```bash
-python -m pylint core tests --disable=missing-docstring
+python3 -m pylint core tests --disable=missing-docstring
 ```
 
 Run tests:
 ```bash
-python -m unittest discover -s tests
+python3 -m unittest discover -s tests
 ```

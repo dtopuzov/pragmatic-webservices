@@ -1,4 +1,4 @@
 requests>=2.22.0
 selenium>=3.141.0
-webdriver_manager>=1.8
+webdriver_manager>=2.2.0
 pylint>=1.9.4

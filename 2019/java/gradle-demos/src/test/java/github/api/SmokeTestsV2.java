@@ -1,4 +1,4 @@
-package github_tests.api;
+package github.api;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -6,14 +6,16 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.Utils;
 
+import java.io.IOException;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 
 /**
- * Getting started with RestAssured
+ * Refactored version of SmokeTestsV1 where body is read from file instead of passing plain string.
  */
-public class SmokeTestsV1 {
+public class SmokeTestsV2 {
 
     private int issueNumber;
     private String user = Utils.getEnvironmentVariable("USER");
@@ -28,10 +30,11 @@ public class SmokeTestsV1 {
     }
 
     @Test
-    public void createIssue() {
+    public void createIssue() throws IOException {
+        String body = Utils.readFile("data/create-issue-body.json");
         issueNumber = given().
                 contentType(ContentType.JSON).
-                body("{\"title\":\"Found a bug\",\"body\":\"I'm having a problem with this.\",\"labels\":[\"bug\"]}").
+                body(body).
                 when().
                 post().
                 then().
@@ -43,7 +46,7 @@ public class SmokeTestsV1 {
 
     }
 
-    @Test(dependsOnMethods = "createIssue")
+    @Test(dependsOnMethods = "SmokeTestsV2.createIssue")
     public void getIssueDetails() {
         when().
                 get(String.valueOf(issueNumber)).
@@ -54,13 +57,14 @@ public class SmokeTestsV1 {
                 body("labels.name", hasItems("bug"));
     }
 
-    @Test(dependsOnMethods = "createIssue")
-    public void updateIssue() {
+    @Test(dependsOnMethods = "SmokeTestsV2.createIssue")
+    public void updateIssue() throws IOException {
+        String body = Utils.readFile("data/update-issue-body.json");
         given().
                 contentType(ContentType.JSON).
-                body("{\"title\":\"Found a bug\",\"state\":\"closed\"}").
+                body(body).
                 when().
-                patch(String.valueOf(issueNumber)).
+                patch("{id}", issueNumber).
                 then().
                 statusCode(200).
                 body("user.login", equalTo(user)).
