@@ -17,7 +17,7 @@ baseApiUrl=https://api.github.com
 baseWebUrl=https://github.com
 repo=test
 user=ws-test-user
-pass=it-is-a-secret
+pass=<it-is-a-secret>
 ```
 Before running tests make sure you set correct repo, user and password.
 
