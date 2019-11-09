@@ -3,6 +3,9 @@
 ### About
 Demo project to show how we can test both web and rest api with same solution.
 
+### Requirements
+[Python 3.7+](https://www.python.org/downloads/)
+
 ### Tutorials
 [Testing in Python](https://realpython.com/python-testing/)
 
