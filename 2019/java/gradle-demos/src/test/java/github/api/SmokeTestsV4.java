@@ -5,7 +5,7 @@ import github.objects.Label;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import settings.Settings;
+import github.settings.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
