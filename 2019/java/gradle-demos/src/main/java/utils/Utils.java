@@ -23,6 +23,15 @@ public class Utils {
     }
 
     public static String getEnvironmentVariable(String name) {
-        return System.getenv(name);
+        return getEnvironmentVariable(name, null);
+    }
+
+    public static String getEnvironmentVariable(String name, String defaultValue) {
+        String value = System.getenv(name);
+        if (value != null) {
+            return value;
+        } else {
+            return defaultValue;
+        }
     }
 }
