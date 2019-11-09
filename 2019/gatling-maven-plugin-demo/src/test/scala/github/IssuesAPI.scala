@@ -1,15 +1,17 @@
 package github
 
 import io.gatling.core.Predef._
+import io.gatling.core.structure.ScenarioBuilder
 import io.gatling.http.Predef._
+import io.gatling.http.protocol.HttpProtocolBuilder
 
 class IssuesAPI extends Simulation {
   def getEnvironmentVariable(name: String): String = System.getenv(name)
 
-  val user = getEnvironmentVariable("USER")
-  val pass = getEnvironmentVariable("PASS")
+  val user: String = getEnvironmentVariable("USER")
+  val pass: String = getEnvironmentVariable("PASS")
 
-  val httpProtocol = http
+  val httpProtocol: HttpProtocolBuilder = http
     .baseUrl("https://api.github.com")
     .inferHtmlResources()
     .acceptHeader("*/*")
@@ -19,7 +21,7 @@ class IssuesAPI extends Simulation {
     .userAgentHeader("PostmanRuntime/7.19.0")
 
 
-  val scn = scenario("IssuesAPI")
+  val scn: ScenarioBuilder = scenario("IssuesAPI")
     .exec(http("create issue")
       .post("/repos/" + user + "/test/issues")
       .body(RawFileBody("com/github/issuesapi/0000_request.json"))
