@@ -20,15 +20,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: |
-        cd 2021/dotnet
-        dotnet restore
-    - name: Build
-      run: |
-        cd 2021/dotnet
-        dotnet build --no-restore
     - name: Test
       run: |
         cd 2021/dotnet
-        dotnet test --no-build --verbosity normal
+        dotnet test --verbosity normal
