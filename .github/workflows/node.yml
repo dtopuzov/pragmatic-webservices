@@ -15,11 +15,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.x
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup virtual display
+      run: |
+         sudo apt-get install xvfb
+         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+         sudo dpkg -i google-chrome*.deb
+         sudo apt-get install -f
+         sudo apt autoremove
+         rm -rf *.deb
     - name: Restore dependencies
       run: |
         cd 2021/typescript
@@ -27,4 +32,4 @@ jobs:
     - name: Run Tests
       run: |
         cd 2021/typescript
-        npm run test
+        xvfb-run --auto-servernum npm run test
