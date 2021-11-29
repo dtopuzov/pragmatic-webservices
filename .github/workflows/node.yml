@@ -24,11 +24,7 @@ jobs:
       run: |
         cd 2021/typescript
         npm ci
-    - name: Run API Tests
+    - name: Run Tests
       run: |
         cd 2021/typescript
-        npm run test:api
-    - name: Run UI Tests
-      run: |
-        cd 2021/typescript
-        npm run test:web
+        npm run test
