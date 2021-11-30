@@ -9,7 +9,7 @@ public class TestClass1 extends BaseTest {
 
     @Test
     public void test1() {
-        Assert.assertTrue(true);
+        Assert.assertTrue(false);
     }
 
     @Test
