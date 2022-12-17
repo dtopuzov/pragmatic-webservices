@@ -1,6 +1,7 @@
 import { IssuesApi } from "../../github/api/IssuesApi";
-import { Builder, By, WebDriver } from "selenium-webdriver";
+import { Browser, Builder, By, WebDriver } from "selenium-webdriver";
 import { Settings } from "../../github/Settings";
+import { Options } from "selenium-webdriver/chrome";
 
 let driver: WebDriver;
 let issueNumber: number;
@@ -16,12 +17,19 @@ beforeAll(async () => {
         Settings.REPO,
         Settings.API_TOKEN
     );
-    
+
     const result = await api.createIssue(payload);
     expect(result.statusCode).toEqual(201);
     issueNumber = result.body["number"];
 
-    driver = await new Builder().forBrowser("chrome").build();
+    const options = new Options();
+    options.headless();
+    options.addArguments('--window-size=1366,768');
+
+    driver = new Builder()
+        .forBrowser(Browser.CHROME)
+        .setChromeOptions(options)
+        .build();
 });
 
 afterAll(async () => {
