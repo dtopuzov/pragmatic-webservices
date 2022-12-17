@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "strict": false,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "types": [
+            "node",
+            "jest"
+        ],
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "outDir": "dist",
+        "target": "es5"
+    }
+}
