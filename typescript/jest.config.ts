@@ -48,7 +48,7 @@ export default {
 
   // An array of regexp pattern strings that are matched against all test paths
   testPathIgnorePatterns: [
-    "/node_modules/", "browser", "github"
+    "/node_modules/"
   ],
 
   // This option allows use of a custom test runner

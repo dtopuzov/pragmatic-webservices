@@ -1,25 +1,22 @@
-import { IssuesApi } from '../../github/api/IssuesApi';
+import { IssuesApi } from "../../github/api/IssuesApi";
+import { Settings } from "../../github/Settings";
 
-let api: IssuesApi;
+const api = new IssuesApi(Settings.OWNER, Settings.REPO, Settings.API_TOKEN);
 let issueNumber: number;
 
-beforeEach(() => {
-    api = new IssuesApi("ws-test-user", "test");
-});
-
-test('create issue', async () => {
+test("create issue", async () => {
     const payload = {
-        "title": "found a bug",
-        "body": "Steps to reproduce"
+        title: "found a bug",
+        body: "Steps to reproduce",
     };
-    
+
     const result = await api.createIssue(payload);
     expect(result.statusCode).toEqual(201);
 
     issueNumber = result.body["number"];
 });
 
-test('get issue', async () => {
+test("get issue", async () => {
     const result = await api.getIssueDetails(issueNumber);
     expect(result.statusCode).toEqual(200);
     expect(result.body["title"]).toEqual("found a bug");

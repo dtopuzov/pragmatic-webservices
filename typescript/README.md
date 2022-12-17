@@ -1,4 +1,4 @@
-# Web and API Tests
+# Web and API Tests Demos
 
 ## Used Technologies
 
@@ -8,6 +8,18 @@
 - [TypeScript](https://www.typescriptlang.org/) to get autocompletion and type safety.
 - [ESLint](https://github.com/eslint/eslint) to enforce code consistency.
 
+## Required Setup
+
+Install [NodeJS 16](https://nodejs.org/dist/v16.19.0/) or newer.
+
+Setup following environment variables:
+
+```bash
+export GITHUB_USER=<your github user name>
+export GITHUB_REPO=<name of test repository owned by user above>
+export GITHUB_TOKEN=<api key with read/write permissions for the repo above>
+```
+
 ## Execute Tests
 
 First install all the dependencies:
@@ -16,16 +28,10 @@ First install all the dependencies:
 npm ci
 ```
 
-API Tests:
+Run Tests:
 
 ```bash
-npm run test:api
-```
-
-Web Tests:
-
-```bash
-npm run test:web
+npm run test
 ```
 
 ## Lint
