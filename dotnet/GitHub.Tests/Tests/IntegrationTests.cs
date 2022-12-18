@@ -17,7 +17,12 @@ namespace GitHubTests
         public void OneTimeSetUp()
         {
             new DriverManager().SetUpDriver(new ChromeConfig());
-            driver = new ChromeDriver();
+
+            var options = new ChromeOptions();
+            options.AddArgument("--headless");
+            options.AddArgument("--window-size=1366,768");
+
+            driver = new ChromeDriver(options);
         }
 
         [SetUp]
