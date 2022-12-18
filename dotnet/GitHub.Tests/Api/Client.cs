@@ -12,16 +12,10 @@ namespace GitHubTests.Api
             message.Headers.UserAgent.ParseAdd(".NET HTTP Client");
             using (var httpClient = new HttpClient(new HttpLoggingHandler(new HttpClientHandler())))
             {
-                httpClient.DefaultRequestHeaders.Add("Authorization", GetToken());
+                httpClient.DefaultRequestHeaders.Add("Authorization", Settings.Token);
                 httpClient.Timeout = new TimeSpan(0, 20, 0);
                 return httpClient.SendAsync(message, HttpCompletionOption.ResponseContentRead).Result;
             }
-        }
-
-        private static string GetToken()
-        {
-            var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
-            return token ?? throw new Exception("Please set GITHUB_TOKEN environment variable with GitHub OAuth access token.");
         }
     }
 }
