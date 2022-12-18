@@ -1,0 +1,31 @@
+name: NodeJS
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup NodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install Dependencies
+      working-directory: ./typescript
+      run: npm ci
+
+    - name: Run Tests
+      working-directory: ./typescript
+      env:
+        GITHUB_USER: ${{ secrets.TEST_GITHUB_USER }}
+        GITHUB_REPO: ${{ secrets.TEST_GITHUB_REPO }}
+        GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
+      run: npm run test
