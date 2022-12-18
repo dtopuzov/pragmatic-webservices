@@ -1,28 +1,31 @@
-# GiHub Tests
-
 ## About
 
 Example how we can test UI and APIs with C#.
 
 ## Used Technologies
 
-NUnit
-Microsoft.Net.Http
-Newtonsoft.Json
-Selenium.WebDriver
-WebDriverManager
+- NUnit
+- Microsoft.Net.Http
+- Newtonsoft.Json
+- Selenium.WebDriver
+- WebDriverManager
 
 ## Before Run
 
-Configuration for GitHub user, repo and password is stored in `appsettings.live.json`.
-Please edit the file before running the project.
+Install [.NET SDK 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0).
+
+Setup following environment variables:
+
+```bash
+GITHUB_USER=<your github user name>
+GITHUB_REPO=<name of test repository owned by user above>
+GITHUB_TOKEN=<api key with read/write permissions for the repo above>
+```
 
 ## Build and Run
 
 ```bash
-dotnet restore
-dotnet build --no-restore
-dotnet test --no-build --verbosity normal
+dotnet test --verbosity normal
 ```
 
 ## Resources
