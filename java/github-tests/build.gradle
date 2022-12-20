@@ -1,0 +1,33 @@
+plugins {
+    id 'checkstyle'
+    id 'java'
+}
+
+group 'org.pragmatic'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.10'
+    implementation 'io.rest-assured:rest-assured:5.3.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.7.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+checkstyle {
+    toolVersion('10.3.1')
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
