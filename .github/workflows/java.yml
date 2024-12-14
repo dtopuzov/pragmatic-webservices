@@ -2,33 +2,33 @@ name: Java
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup NodeJS
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - uses: actions/checkout@v3
 
-    - name: Lint
-      working-directory: ./java/github-tests
-      run: |
-        ./gradlew clean checkstyleMain
-        ./gradlew clean checkstyleTest
+      - name: Setup NodeJS
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
 
-    - name: Run Tests
-      working-directory: ./java/github-tests
-      env:
-        GITHUB_USER: ${{ secrets.TEST_GITHUB_USER }}
-        GITHUB_REPO: ${{ secrets.TEST_GITHUB_REPO }}
-        GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
-      run: ./gradlew clean test
+      - name: Lint
+        working-directory: ./java/github-tests
+        run: |
+          ./gradlew clean checkstyleMain
+          ./gradlew clean checkstyleTest
+
+      - name: Run Tests
+        working-directory: ./java/github-tests
+        env:
+          GITHUB_USER: ${{ secrets.TEST_GITHUB_USER }}
+          GITHUB_REPO: ${{ secrets.TEST_GITHUB_REPO }}
+          GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
+        run: ./gradlew clean test
