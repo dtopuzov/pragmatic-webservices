@@ -10,11 +10,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Browser {
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public Browser() {
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setHeadless(true);
+        chromeOptions.addArguments("--headless=new");
         chromeOptions.addArguments("--window-size=1366,768");
         driver = new ChromeDriver(chromeOptions);
     }

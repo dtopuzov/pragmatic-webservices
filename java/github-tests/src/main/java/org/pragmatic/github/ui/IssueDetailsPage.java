@@ -25,7 +25,7 @@ public class IssueDetailsPage {
     }
 
     public String getBody() {
-        By bodyLocator = By.cssSelector(".js-command-palette-issue-body .edit-comment-hide .markdown-body");
+        By bodyLocator = By.cssSelector(".edit-comment-hide .markdown-body");
         return browser.find(bodyLocator).getText();
     }
 }
