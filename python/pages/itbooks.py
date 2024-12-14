@@ -12,6 +12,7 @@ class ItBooksHome:
     URL = "https://itbook.store/"
 
     # Locators
+    CONSENT = (By.CSS_SELECTOR, "button[aria-label='Consent']")
     SEARCH_BOX = (By.ID, "q")
 
     # Initializer
@@ -19,6 +20,9 @@ class ItBooksHome:
         self.browser = browser
         self.wait = WebDriverWait(self.browser, 10)
         self.browser.get(self.URL)
+
+        consent = self.wait.until((lambda b: b.find_element(*self.CONSENT)))
+        consent.click()
 
     # Interaction Methods
     def search(self, title: str) -> None:

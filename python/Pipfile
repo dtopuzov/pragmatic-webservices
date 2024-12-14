@@ -6,11 +6,10 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-selenium = "==4.0.0"
-requests = "==2.26.0"
-pytest = "==6.2.5"
-pytest-xdist = "==2.4.0"
-webdriver-manager = "==3.5.2"
+selenium = "==4.27.1"
+requests = "==2.32.3"
+pytest = "==8.3.4"
+pytest-xdist = "==3.6.1"
 
 [requires]
-python_version = "3.8"
+python_version = "3.12"

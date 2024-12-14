@@ -2,21 +2,17 @@
 Pytest fixture for web tests.
 """
 import os
-
 import pytest
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 @pytest.fixture(scope="session")
 def browser() -> webdriver:
-    ChromeDriverManager().install()
-
     # Initialize the WebDriver instance
     headless = os.getenv("HEADLESS", default="False")
     options = webdriver.ChromeOptions()
     if headless.lower() == "true":
-        options.add_argument("--headless")
+        options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
