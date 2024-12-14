@@ -2,31 +2,31 @@ name: NodeJS
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup NodeJS
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
+      - uses: actions/checkout@v4
 
-    - name: Install Dependencies
-      working-directory: ./typescript
-      run: npm ci
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
-    - name: Run Tests
-      working-directory: ./typescript
-      env:
-        GITHUB_USER: ${{ secrets.TEST_GITHUB_USER }}
-        GITHUB_REPO: ${{ secrets.TEST_GITHUB_REPO }}
-        GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
-        HEADLESS: true
-      run: npm run test
+      - name: Install Dependencies
+        working-directory: ./typescript
+        run: npm ci
+
+      - name: Run Tests
+        working-directory: ./typescript
+        env:
+          GITHUB_USER: ${{ secrets.TEST_GITHUB_USER }}
+          GITHUB_REPO: ${{ secrets.TEST_GITHUB_REPO }}
+          GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
+          HEADLESS: true
+        run: npm run test

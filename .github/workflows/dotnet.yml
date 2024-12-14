@@ -2,26 +2,26 @@ name: .NET
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '6.0.x'
+      - uses: actions/checkout@v4
 
-    - name: Run Tests
-      working-directory: ./dotnet
-      env:
-        GITHUB_USER: ${{ secrets.TEST_GITHUB_USER }}
-        GITHUB_REPO: ${{ secrets.TEST_GITHUB_REPO }}
-        GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
-      run: dotnet test
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.x"
+
+      - name: Run Tests
+        working-directory: ./dotnet
+        env:
+          GITHUB_USER: ${{ secrets.TEST_GITHUB_USER }}
+          GITHUB_REPO: ${{ secrets.TEST_GITHUB_REPO }}
+          GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
+        run: dotnet test
