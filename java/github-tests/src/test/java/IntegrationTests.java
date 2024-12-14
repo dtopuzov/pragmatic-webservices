@@ -34,8 +34,8 @@ public class IntegrationTests {
 
         // Create issue via API
         IssueDetails result = issuesApi.createIssue(details);
-        assertEquals(result.title, details.title);
-        assertEquals(result.user.login, Settings.USER);
+        assertEquals(details.title, result.title);
+        assertEquals(Settings.USER, result.user.login);
         int issueNumber = result.number;
 
         // Open issue details web page and verify it looks OK
