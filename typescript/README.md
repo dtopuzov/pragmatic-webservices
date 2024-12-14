@@ -10,7 +10,7 @@
 
 ## Required Setup
 
-Install [NodeJS 16](https://nodejs.org/dist/v16.19.0/) or newer.
+Install [NodeJS](https://nodejs.org/).
 
 Setup following environment variables:
 
@@ -44,4 +44,4 @@ Notes:
 
 - ESLint can be also integrated in VS Code via [plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) allow the IDE to auto format files and avoid some ESLint warnings and errors.
-- Spell check is not enforced with rules, but [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) might be useful.
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) might be useful as well.

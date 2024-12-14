@@ -1,9 +1,10 @@
 import { IssuesApi } from "../../github/api/IssuesApi";
-import { Browser, Builder, By, WebDriver } from "selenium-webdriver";
 import { Settings } from "../../github/Settings";
 import { Options } from "selenium-webdriver/chrome";
+import { Browser } from "../../browser/browser";
+import { By } from "selenium-webdriver";
 
-let driver: WebDriver;
+let browser: Browser;
 let issueNumber: number;
 
 beforeAll(async () => {
@@ -12,36 +13,23 @@ beforeAll(async () => {
         body: "Steps to reproduce",
     };
 
-    const api = new IssuesApi(
-        Settings.OWNER,
-        Settings.REPO,
-        Settings.API_TOKEN
-    );
+    const api = new IssuesApi(Settings.OWNER, Settings.REPO, Settings.API_TOKEN);
 
     const result = await api.createIssue(payload);
     expect(result.statusCode).toEqual(201);
     issueNumber = result.body["number"];
 
-    const options = new Options();
-    options.headless();
-    options.addArguments('--window-size=1366,768');
-
-    driver = new Builder()
-        .forBrowser(Browser.CHROME)
-        .setChromeOptions(options)
-        .build();
+    browser = new Browser();
 });
 
 afterAll(async () => {
-    await driver.quit();
+    await browser.close();
 });
 
-test("get issue details", async () => {
-    await driver.get(
-        `${Settings.WEB_URL}/${Settings.OWNER}/${Settings.REPO}/issues/${issueNumber}`
-    );
-    const title = await driver.findElement(
-        By.css("h1.gh-header-title .js-issue-title")
-    );
+test("issues details page renders correct title", async () => {
+    const url = `${Settings.WEB_URL}/${Settings.OWNER}/${Settings.REPO}/issues/${issueNumber}`;
+    await browser.navigateTo(url);
+
+    const title = await browser.find(By.css("h1.gh-header-title .js-issue-title"));
     expect(await title.getText()).toEqual("found a bug");
 });
