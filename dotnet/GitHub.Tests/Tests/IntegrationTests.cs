@@ -3,8 +3,6 @@ using GitHubTests.Api.Objects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using WebDriverManager;
-using WebDriverManager.DriverConfigs.Impl;
 
 namespace GitHubTests
 {
@@ -16,10 +14,8 @@ namespace GitHubTests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            new DriverManager().SetUpDriver(new ChromeConfig());
-
             var options = new ChromeOptions();
-            options.AddArgument("--headless");
+            options.AddArgument("--headless=new");
             options.AddArgument("--window-size=1366,768");
 
             driver = new ChromeDriver(options);
@@ -58,7 +54,7 @@ namespace GitHubTests
             var titleLocator = By.CssSelector("h1.gh-header-title .js-issue-title");
             var title = driver.FindElement(titleLocator).Text;
 
-            Assert.AreEqual("Found a bug", title);
+            Assert.That(title, Is.EqualTo("Found a bug"));
         }
     }
 }

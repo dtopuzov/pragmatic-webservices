@@ -28,7 +28,7 @@ namespace GitHubTests.Api.Endpoints
 
             var response = Client.SendRequest(message);
 
-            Assert.AreEqual(System.Net.HttpStatusCode.Created, response.StatusCode);
+            Assert.That(response.StatusCode, Is.EqualTo(System.Net.HttpStatusCode.Created));
             var result = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<IssueDetails>(result);
         }
