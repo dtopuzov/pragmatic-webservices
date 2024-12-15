@@ -8,11 +8,10 @@ Example how we can test UI and APIs with C#.
 - Microsoft.Net.Http
 - Newtonsoft.Json
 - Selenium.WebDriver
-- WebDriverManager
 
 ## Before Run
 
-Install [.NET SDK 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0).
+Install [.NET SDK 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0).
 
 Setup following environment variables:
 

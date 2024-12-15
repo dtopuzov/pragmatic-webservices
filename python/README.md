@@ -9,7 +9,6 @@ Technologies:
 - [pytest-xdist](https://pypi.org/project/pytest-xdist/) to run tests in parallel.
 - [requests](https://pypi.org/project/requests/) to perform api calls.
 - [selenium](https://pypi.org/project/selenium/) to drive browsers.
-- [webdriver-manager](https://pypi.org/project/webdriver-manager/) to handle browser drivers.
 
 ## Requirements
 
